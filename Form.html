@@ -3,30 +3,90 @@
 <html>
 <head>
     <title>Name and Email Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
 
     <h1>Registration Form</h1>
 
-    <form id="myForm"></form>
+    <form id="myForm">
 
-        <label>Name:</label>
-        <input type="text">
+    <label>Name:</label>
+    <input type="text" id="name">
 
-        <br><br>
+    <br><br>
 
-        <label>Email:</label>
-        <input type="email">
+    <label>Email:</label>
+    <input type="email" id="email">
 
-        <br><br>
+    <br><br>
 
-        <button type="submit">Submit</button>
+    <button type="submit">Submit</button>
 
-    </form>
+</form>
+<div id="result"></div>
+
 
 <script>
-<div id="result"></div>
 
     const form = document.getElementById("myForm");
 
