@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>My Personal Profile</title>
+
+    <style>
+    
+        body {
+            background-color: lightgray;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        
+        h1 {
+            color: blue;
+            text-align: center;
+            background-color: white;
+            padding: 15px;
+            border: 2px solid black;
+        }
+
+        
+        h2 {
+            color: purple;
+        }
+
+        
+        p {
+            color: green;
+            font-size: 20px;
+        }
+
+        
+        ul {
+            background-color: white;
+            padding: 20px;
+            border: 2px solid black;
+        }
+
+        
+        ol {
+            background-color: white;
+            padding: 20px;
+            border: 2px solid black;
+        }
+
+    
+        li {
+            margin: 8px;
+            font-size: 18px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>My Personal Profile</h1>
+
+    <h2>About Me</h2>
+
+    <p>My name is Adesola. I am learning HTML and CSS.</p>
+
+    <h2>My Hobbies</h2>
+
+    <ul>
+        <li>Reading</li>
+        <li>Coding</li>
+        <li>Listening to music</li>
+    </ul>
+
+    <h2>My Goals</h2>
+
+    <ol>
+        <li>Learn HTML</li>
+        <li>Learn CSS</li>
+        <li>Build websites</li>
+    </ol>
+
+</body>
+
+</html>
