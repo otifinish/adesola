@@ -1,66 +1,442 @@
-<!doctype html>
-<html lang = eng>
-    <head>
-        <meta charset = "UTF-8">
-        <title>Student Registration Form</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration System</title>
 
-        <style>
-            body { background-color: lightgray; font-family: Arial, sans-serif; margin: 0; padding: 30px;
-            }
-            h1 { text-align: center; color: darkblue; }
-            form { width: 500px; margin: auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px gray; }
-            fieldset { border: 2px solid darkblue; border-radius: 8px; padding: 20px; }
-            legend { color: darkblue; font-size: 20px; font-weight: bold; }
-            label { font-weight: bold; }
-            input[type="text"], input[type="email"], textarea, select { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 10px; box-sizing: border-box; border: 1px solid gray; border-radius: 5px; }
-            input[type="submit"] { background-color: darkblue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        </style>
-    </head>
-    <body>
-        <h1>Student Registration Form</h1>
+body {
+    background: #eef2f7;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 25px;
+}
 
-        <form>
-            <fieldset>
-                <legend>Personal Information</legend>
+h1, h2 {
+    text-align: center;
+    color: darkblue;
+}
 
-                <label>Full Name:</label>
-                <input type="text" name="fullname"><br><br>
+.container {
+    max-width: 750px;
+    margin: auto;
+}
 
-                <label>Email:</label>
-                <input type="email" name="email"><br><br>
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px gray;
+}
 
-                <label>Gender:</label>
-                <input type="radio" name="gender" value="male"> Male
-                <input type="radio" name="gender" value="female"> Female
-                <br><br>
+fieldset {
+    border: 2px solid darkblue;
+    border-radius: 8px;
+    padding: 20px;
+}
 
-                <label>Favourite Subjects:</label>
-                <input type="checkbox" name="subject" value="html"> HTML
-                <input type="checkbox" name="subject" value="css"> CSS
-                <br><br>
+legend {
+    color: darkblue;
+    font-weight: bold;
+    font-size: 20px;
+}
 
-                <label>Class:</label>
-                <select name="class">
-                <option>Beginner</option>
-                <option>Intermediate</option>
-                <option>Advanced</option>
-                </select>
-                <br><br>
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
 
-               <label>Upload Passport:</label>
-                <input type="file"><br><br>
+input, select, textarea {
+    width: 100%;
+    padding: 11px;
+    margin-top: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
 
-                 <label>Address:</label><br>
-                 <textarea rows="5" cols="30"></textarea><br><br>
+.gender, .subjects {
+    margin-top: 10px;
+}
 
-                 <input type="submit" value="Register">
+.gender input, .subjects input {
+    width: auto;
+}
 
-    </fieldset>
+button {
+    padding: 11px 18px;
+    background: darkblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
 
+button:hover {
+    background: royalblue;
+}
+
+.reset {
+    background: gray;
+}
+
+#message {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.student-list {
+    background: white;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th, td {
+    border: 1px solid lightgray;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: darkblue;
+    color: white;
+}
+
+.delete {
+    background: crimson;
+}
+
+.edit {
+    background: green;
+}
+
+#search {
+    margin-bottom: 15px;
+}
+
+.stats {
+    background: white;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    form {
+        padding: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Student Registration System</h1>
+
+<div class="stats">
+    <h3>Total Registered Students: 
+        <span id="totalStudents">0</span>
+    </h3>
+</div>
+
+<form id="studentForm">
+
+<fieldset>
+<legend>Personal Information</legend>
+
+<label>Full Name:</label>
+<input type="text" id="fullname" placeholder="Enter full name" required>
+
+<label>Email Address:</label>
+<input type="email" id="email" placeholder="Enter email" required>
+
+<label>Phone Number:</label>
+<input type="tel" id="phone" placeholder="Enter phone number" required>
+
+<label>Date of Birth:</label>
+<input type="date" id="dob" required>
+
+<label>Gender:</label>
+<div class="gender">
+    <input type="radio" name="gender" value="Male" required> Male
+    <input type="radio" name="gender" value="Female"> Female
+</div>
+
+<label>State of Origin:</label>
+<select id="state" required>
+    <option value="">Select State</option>
+    <option>Lagos</option>
+    <option>Ogun</option>
+    <option>Oyo</option>
+    <option>Osun</option>
+    <option>Ekiti</option>
+    <option>Ondo</option>
+    <option>Abuja</option>
+    <option>Other</option>
+</select>
+
+<label>Favourite Subjects:</label>
+<div class="subjects">
+    <input type="checkbox" name="subject" value="HTML"> HTML
+    <input type="checkbox" name="subject" value="CSS"> CSS
+    <input type="checkbox" name="subject" value="JavaScript"> JavaScript
+    <input type="checkbox" name="subject" value="Python"> Python
+</div>
+
+<label>Course:</label>
+<select id="course" required>
+    <option value="">Select Course</option>
+    <option>Web Development</option>
+    <option>Data Science</option>
+    <option>Cybersecurity</option>
+    <option>Artificial Intelligence</option>
+    <option>Computer Science</option>
+</select>
+
+<label>Class Level:</label>
+<select id="class" required>
+    <option value="">Select Class</option>
+    <option>Beginner</option>
+    <option>Intermediate</option>
+    <option>Advanced</option>
+</select>
+
+<label>Password:</label>
+<input type="password" id="password" minlength="6" required>
+
+<label>Confirm Password:</label>
+<input type="password" id="confirmPassword" minlength="6" required>
+
+<label>Upload Passport:</label>
+<input type="file" id="passport" accept="image/*">
+
+<label>Home Address:</label>
+<textarea id="address" rows="4" placeholder="Enter your address" required></textarea>
+
+<button type="submit" id="submitBtn">Register Student</button>
+<button type="reset" class="reset">Clear Form</button>
+
+</fieldset>
 </form>
 
+<p id="message"></p>
 
+<div class="student-list">
 
+<h2>Registered Students</h2>
 
-          
+<input type="text" id="search" placeholder="Search students by name or email">
+
+<table>
+<thead>
+<tr>
+<th>Student ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Course</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="studentTable"></tbody>
+</table>
+
+</div>
+</div>
+
+<script>
+const form = document.getElementById("studentForm");
+const message = document.getElementById("message");
+const studentTable = document.getElementById("studentTable");
+const totalStudents = document.getElementById("totalStudents");
+const search = document.getElementById("search");
+
+let students = [];
+let editingIndex = null;
+
+function generateStudentID() {
+    return "STD" + Date.now().toString().slice(-6);
+}
+
+function displayStudents(data = students) {
+
+    studentTable.innerHTML = "";
+
+    data.forEach(function(student) {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${student.id}</td>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.course}</td>
+            <td>
+                <button class="edit"
+                onclick="editStudent('${student.id}')">Edit</button>
+
+                <button class="delete"
+                onclick="deleteStudent('${student.id}')">Delete</button>
+            </td>
+        `;
+
+        studentTable.appendChild(row);
+    });
+
+    totalStudents.textContent = students.length;
+}
+
+form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const fullname = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const dob = document.getElementById("dob").value;
+    const state = document.getElementById("state").value;
+    const course = document.getElementById("course").value;
+    const studentClass = document.getElementById("class").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const address = document.getElementById("address").value.trim();
+
+    const genderElement = document.querySelector(
+        'input[name="gender"]:checked'
+    );
+
+    if (!genderElement) {
+        message.textContent = "Please select your gender.";
+        message.style.color = "red";
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match!";
+        message.style.color = "red";
+        return;
+    }
+
+    if (document.querySelectorAll(
+        'input[name="subject"]:checked'
+    ).length === 0) {
+        message.textContent = "Please select at least one subject.";
+        message.style.color = "red";
+        return;
+    }
+
+    const selectedSubjects = Array.from(
+        document.querySelectorAll('input[name="subject"]:checked')
+    ).map(subject => subject.value);
+
+    const student = {
+        id: editingIndex !== null ? students[editingIndex].id : generateStudentID(),
+        name: fullname,
+        email: email,
+        phone: phone,
+        dob: dob,
+        gender: genderElement.value,
+        state: state,
+        subjects: selectedSubjects,
+        course: course,
+        studentClass: studentClass,
+        address: address
+    };
+
+    if (editingIndex !== null) {
+        students[editingIndex] = student;
+        editingIndex = null;
+        document.getElementById("submitBtn").textContent = "Register Student";
+        message.textContent = "Student information updated successfully!";
+    } else {
+        students.push(student);
+        message.textContent = "Student registered successfully!";
+    }
+
+    message.style.color = "green";
+
+    displayStudents();
+    form.reset();
+
+});
+
+function deleteStudent(id) {
+
+    students = students.filter(student => student.id !== id);
+
+    displayStudents();
+
+    message.textContent = "Student deleted successfully!";
+    message.style.color = "green";
+}
+
+function editStudent(id) {
+
+    const index = students.findIndex(student => student.id === id);
+
+    const student = students[index];
+
+    editingIndex = index;
+
+    document.getElementById("fullname").value = student.name;
+    document.getElementById("email").value = student.email;
+    document.getElementById("phone").value = student.phone;
+    document.getElementById("dob").value = student.dob;
+    document.getElementById("state").value = student.state;
+    document.getElementById("course").value = student.course;
+    document.getElementById("class").value = student.studentClass;
+    document.getElementById("address").value = student.address;
+
+    document.querySelectorAll('input[name="gender"]').forEach(input => {
+        input.checked = input.value === student.gender;
+    });
+
+    document.querySelectorAll('input[name="subject"]').forEach(input => {
+        input.checked = student.subjects.includes(input.value);
+    });
+
+    document.getElementById("submitBtn").textContent = "Update Student";
+
+    message.textContent = "You can now edit student information.";
+    message.style.color = "blue";
+}
+
+search.addEventListener("input", function() {
+
+    const searchValue = search.value.toLowerCase();
+
+    const filteredStudents = students.filter(student =>
+        student.name.toLowerCase().includes(searchValue) ||
+        student.email.toLowerCase().includes(searchValue)
+    );
+
+    displayStudents(filteredStudents);
+
+});
+
+</script>
+
+</body>
+</html>
